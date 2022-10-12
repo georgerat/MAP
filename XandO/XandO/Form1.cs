@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace XandO
@@ -23,21 +17,32 @@ namespace XandO
 
         private void button1_Click(object sender, EventArgs e)
         {
-            buttons = new Button[n, n];
-            int size = pictureBox1.Width / 3;
+            if (buttons == null)
+            {
+                buttons = new Button[n, n];
+                int size = pictureBox1.Width / 3;
 
-            for (int i = 0; i < n; i++)
-                for (int j = 0; j < n; j++)
-                {
-                    Button button = new Button();
-                    button.Size = new Size(size, size);
-                    button.Parent = pictureBox1;
-                    button.Location = new Point(j * size, i * size);
-                    button.Font = new Font("Arial", 30);
-                    button.Click += gridButton_Click;
-
-                    buttons[i, j] = button;
-                }
+                for (int i = 0; i < n; i++)
+                    for (int j = 0; j < n; j++)
+                    {
+                        Button button = new Button();
+                        button.Size = new Size(size, size);
+                        button.Parent = pictureBox1;
+                        button.Location = new Point(j * size, i * size);
+                        button.Font = new Font("Arial", 30);
+                        button.Click += gridButton_Click;
+                        buttons[i, j] = button;
+                    }
+            }
+            else
+            {
+                for (int i = 0; i < n; i++)
+                    for (int j = 0; j < n; j++)
+                    {
+                        buttons[i, j].Enabled = true;
+                        buttons[i, j].Text = "";
+                    }
+            }
         }
 
         private void gridButton_Click(object sender, EventArgs e)
@@ -78,9 +83,11 @@ namespace XandO
 
         bool CheckGameWon()
         {
+            int sx, sy;
             for (int i = 0; i < n; i++)
             {
-                int sx = 0, sy = 0;
+                sx = 0;
+                sy = 0;
                 for (int j = 0; j < n; j++)
                 {
                     if (buttons[i, j].Text == "X")
@@ -100,7 +107,34 @@ namespace XandO
                     if (buttons[j, i].Text == "O")
                         sy++;
                 }
+                if (sx == 3 || sy == 3)
+                    return true;
             }
+
+            sx = 0;
+            sy = 0;
+            for (int i = 0; i < n; i++)
+            {
+                if (buttons[i, i].Text == "X")
+                    sx++;
+                else if (buttons[i, i].Text == "O")
+                    sy++;
+            }
+            if (sx == 3 || sy == 3)
+                return true;
+
+            sx = 0;
+            sy = 0;
+            for (int i = 0; i < n; i++)
+            {
+                if (buttons[i, n - i - 1].Text == "X")
+                    sx++;
+                else if (buttons[i, n - i - 1].Text == "O")
+                    sy++;
+            }
+            if (sx == 3 || sy == 3)
+                return true;
+
             return false;
         }
     }
