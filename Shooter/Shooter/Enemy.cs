@@ -5,14 +5,16 @@ namespace Shooter
     public class Enemy
     {
         public double health, speed, damage, size, positionX;
+        public int spawnTime;
         public Point position;
 
-        public Enemy(double health, double speed, double damage, double size)
+        public Enemy(double health, double speed, double damage, double size, int spawnTime)
         {
             this.health = health;
             this.speed = speed;
             this.damage = damage;
             this.size = size;
+            this.spawnTime = spawnTime;
             position = Engine.GetRandomPoint((int)size);
             positionX = position.X;
         }
