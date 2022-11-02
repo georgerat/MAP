@@ -31,6 +31,15 @@ namespace Shooter
         {
             if (click.X > position.X && click.X < position.X + size && click.Y > position.Y && click.Y < position.Y + size)
             {
+                int x = click.X - position.X;
+                int y = click.Y - position.Y;
+                Bitmap bitmap = new Bitmap((int)size, (int)size);
+                Graphics grp = Graphics.FromImage(bitmap);
+                grp.DrawImage(Engine.form.enemy1, 0, 0, (int)size, (int)size);
+
+                if (bitmap.GetPixel(x, y).ToArgb() == 0)
+                    return;
+
                 health -= 20;
                 Engine.graphics.DrawString("20", new Font("Arial", 12), new SolidBrush(Color.White), click);
                 Engine.form.pictureBox1.Image = Engine.bitmap;

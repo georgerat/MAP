@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Shooter
@@ -8,6 +9,8 @@ namespace Shooter
     {
         public Image background = Image.FromFile("../../images/Fundal.jpg");
         public Image enemy1 = Image.FromFile("../../images/Enemy1.png");
+        public Image gun1 = Image.FromFile("../../images/Gun1.png");
+        public SoundPlayer backgroundSound = new SoundPlayer("../../sounds/Thriller.wav");
 
         public Form1()
         {
@@ -34,6 +37,9 @@ namespace Shooter
             pictureBox1.Height = Height;
 
             TimeLabel.Parent = WaveLabel.Parent = HealthLabel.Parent = pictureBox1;
+            gun.Parent = pictureBox1;
+
+            backgroundSound.PlayLooping();
             Engine.Init(this);
         }
 
@@ -45,6 +51,11 @@ namespace Shooter
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
             Engine.Shoot(e.Location);
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            gun.Location = new Point(e.Location.X, e.Location.Y + 20);
         }
     }
 }
