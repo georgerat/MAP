@@ -24,21 +24,21 @@ namespace Shooter
             graphics = Graphics.FromImage(bitmap);
 
             var wave1 = new List<Enemy>();
-            wave1.Add(new Enemy(100, 5, 20, 50, 0));
-            wave1.Add(new Enemy(100, 5, 20, 50, 15));
-            wave1.Add(new Enemy(100, 5, 20, 50, 30));
-            wave1.Add(new Enemy(100, 5, 20, 50, 45));
-            wave1.Add(new Enemy(100, 5, 20, 50, 60));
+            wave1.Add(new NormalEnemy(0));
+            wave1.Add(new NormalEnemy(20));
+            wave1.Add(new NormalEnemy(35));
+            wave1.Add(new NormalEnemy(45));
+            wave1.Add(new NormalEnemy(55));
 
             var wave2 = new List<Enemy>();
-            wave2.Add(new Enemy(100, 5, 20, 50, 0));
-            wave2.Add(new Enemy(100, 5, 20, 50, 10));
-            wave2.Add(new Enemy(100, 5, 20, 50, 17));
-            wave2.Add(new Enemy(100, 5, 20, 50, 22));
-            wave2.Add(new Enemy(100, 5, 20, 50, 30));
-            wave2.Add(new Enemy(100, 5, 20, 50, 35));
-            wave2.Add(new Enemy(100, 5, 20, 50, 42));
-            wave2.Add(new Enemy(100, 5, 20, 50, 50));
+            wave2.Add(new NormalEnemy(0));
+            wave2.Add(new NormalEnemy(10));
+            wave2.Add(new NormalEnemy(17));
+            wave2.Add(new NormalEnemy(22));
+            wave2.Add(new NormalEnemy(30));
+            wave2.Add(new FatEnemy(35));
+            wave2.Add(new NormalEnemy(42));
+            wave2.Add(new FatEnemy(50));
 
             waves.Add(wave1);
             waves.Add(wave2);
@@ -128,9 +128,20 @@ namespace Shooter
 
             foreach (Enemy enemy in enemies)
             {
-                graphics.DrawImage(form.enemy1, enemy.position.X, enemy.position.Y, (int)enemy.size, (int)enemy.size);
+                enemy.Draw();
             }
             form.pictureBox1.Image = bitmap;
+        }
+
+        public static bool IsPixelTransparent(Point click, Enemy enemy)
+        {
+            int x = click.X - enemy.position.X;
+            int y = click.Y - enemy.position.Y;
+            Bitmap bitmap = new Bitmap((int)enemy.size, (int)enemy.size);
+            Graphics grp = Graphics.FromImage(bitmap);
+            grp.DrawImage(enemy.image, 0, 0, (int)enemy.size, (int)enemy.size);
+
+            return bitmap.GetPixel(x, y).ToArgb() == 0;
         }
     }
 }

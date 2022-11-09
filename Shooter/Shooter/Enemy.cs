@@ -2,11 +2,12 @@
 
 namespace Shooter
 {
-    public class Enemy
+    public abstract class Enemy
     {
         public double health, speed, damage, size, positionX;
         public int spawnTime;
         public Point position;
+        public Image image;
 
         public Enemy(double health, double speed, double damage, double size, int spawnTime)
         {
@@ -19,29 +20,26 @@ namespace Shooter
             positionX = position.X;
         }
 
-        public void Move()
-        {
-            position.Y += (int)speed;
-            size += 1.0 / 4;
-            positionX -= 1.0 / 8;
-            position.X = (int)positionX;
-        }
+        public abstract void Move();
+        public abstract void Draw();
 
         public void GetShoot(Point click)
         {
             if (click.X > position.X && click.X < position.X + size && click.Y > position.Y && click.Y < position.Y + size)
             {
-                int x = click.X - position.X;
-                int y = click.Y - position.Y;
-                Bitmap bitmap = new Bitmap((int)size, (int)size);
-                Graphics grp = Graphics.FromImage(bitmap);
-                grp.DrawImage(Engine.form.enemy1, 0, 0, (int)size, (int)size);
-
-                if (bitmap.GetPixel(x, y).ToArgb() == 0)
+                if (Engine.IsPixelTransparent(click, this))
                     return;
 
-                health -= 20;
-                Engine.graphics.DrawString("20", new Font("Arial", 12), new SolidBrush(Color.White), click);
+                if (click.Y - position.Y < size / 6)
+                {
+                    health -= 50;
+                    Engine.graphics.DrawString("50", new Font("Arial", 12), new SolidBrush(Color.Red), click);
+                }
+                else
+                {
+                    health -= 20;
+                    Engine.graphics.DrawString("20", new Font("Arial", 12), new SolidBrush(Color.White), click);
+                }
                 Engine.form.pictureBox1.Image = Engine.bitmap;
             }
         }
