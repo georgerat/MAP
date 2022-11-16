@@ -48,7 +48,7 @@ namespace Shooter
         public static void Tick()
         {
             time++;
-            form.TimeLabel.Text = (time / 10).ToString();
+            form.TimeLabel.Text = ((int)(time / 10)).ToString();
 
             if (wave.Count == 0 && enemies.Count == 0)
             {
@@ -77,7 +77,7 @@ namespace Shooter
                 if (enemy.position.Y >= form.Height)
                 {
                     fortHealth -= enemy.damage;
-                    form.HealthLabel.Text = $"Health: {fortHealth}";
+                    form.HealthLabel.Text = $"Health: {fortHealth}/100";
                     enemies.Remove(enemies[i]);
                     i--;
                 }
@@ -130,6 +130,12 @@ namespace Shooter
             {
                 enemy.Draw();
             }
+            form.pictureBox1.Image = bitmap;
+        }
+
+        public static void BlurBackground()
+        {
+            graphics.FillRectangle(new SolidBrush(Color.FromArgb(150, Color.Black)), 0, 0, form.Width, form.Height);
             form.pictureBox1.Image = bitmap;
         }
 

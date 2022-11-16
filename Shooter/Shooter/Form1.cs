@@ -20,6 +20,8 @@ namespace Shooter
         {
             if (e.KeyCode == Keys.Escape)
             {
+                Engine.BlurBackground();
+
                 timer1.Enabled = false;
                 var option = MessageBox.Show("Are you sure?", "Exit Game", MessageBoxButtons.OKCancel);
                 if (option == DialogResult.OK)
@@ -32,13 +34,17 @@ namespace Shooter
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            pictureBox1.Width = Width;
-            pictureBox1.Height = Height;
+            pictureBox1.Width = MenuScreen.Width = Width;
+            pictureBox1.Height = MenuScreen.Height = Height;
 
             TimeLabel.Parent = WaveLabel.Parent = HealthLabel.Parent = pictureBox1;
             gun.Parent = pictureBox1;
 
-            backgroundSound.PlayLooping();
+            startButton.Parent = exitButton.Parent = MenuScreen;
+            startButton.Left = exitButton.Left = this.Width / 2 - startButton.Width / 2;
+            startButton.Top = this.Height / 2 - startButton.Height;
+            exitButton.Top = this.Height / 2;
+
             Engine.Init(this);
         }
 
@@ -55,6 +61,19 @@ namespace Shooter
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             gun.Location = new Point(e.Location.X, e.Location.Y + 20);
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = true;
+            MenuScreen.Enabled = false;
+            MenuScreen.Visible = false;
+            backgroundSound.PlayLooping();
         }
     }
 }
