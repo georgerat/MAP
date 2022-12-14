@@ -5,32 +5,55 @@ namespace Jumpy_Bears
 {
     public partial class Form1 : Form
     {
+        public Player player;
+        bool start = false;
+
         public Form1()
         {
             InitializeComponent();
+            timer1.Enabled = false;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            foreach (Control x in Controls)
+            player.Move();
+            Engine.CheckIfYouLose();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            DoubleBuffered = true;
+            Engine.Initialize(this);
+            player = new Player();
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                Close();
+            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.A)
+                player.isMovingLeft = true;
+            if (e.KeyCode == Keys.Right || e.KeyCode == Keys.D)
+                player.isMovingRight = true;
+            if (e.KeyCode == Keys.Up || e.KeyCode == Keys.W)
             {
-                if ((string)x.Tag == "platform")
+                if (start == false)
                 {
-                    if (x.Top <= Height)
-                        x.Top = x.Top + 5;
-                    else
-                    {
-                        Random random = new Random();
-                        int platformWidth = random.Next(100, 200);
-                        int xa = random.Next(-20, 580 - platformWidth);
-                        int ya = random.Next(50, 80);
-                        x.Top = -ya;
-                        x.Left = xa;
-                        x.Height = 30;
-                        x.Width = platformWidth;
-                    }
+                    timer1.Enabled = true;
+                    start = true;
                 }
+                if (!player.isJumping)
+                    player.gravity = -Player.maxGravity;
+                player.isJumping = true;
             }
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.A)
+                player.isMovingLeft = false;
+            if (e.KeyCode == Keys.Right || e.KeyCode == Keys.D)
+                player.isMovingRight = false;
         }
     }
 }

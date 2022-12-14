@@ -29,32 +29,21 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.platform1 = new System.Windows.Forms.PictureBox();
             this.platform2 = new System.Windows.Forms.PictureBox();
             this.platform3 = new System.Windows.Forms.PictureBox();
             this.platform4 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.platform1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.platform2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.platform3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.platform4)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Crimson;
-            this.pictureBox1.Location = new System.Drawing.Point(256, 631);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(80, 80);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 50;
+            this.timer1.Interval = 30;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // platform1
@@ -106,10 +95,11 @@
             this.Controls.Add(this.platform3);
             this.Controls.Add(this.platform2);
             this.Controls.Add(this.platform1);
-            this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "Jumpy Bears";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.platform1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.platform2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.platform3)).EndInit();
@@ -119,8 +109,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox platform1;
         private System.Windows.Forms.PictureBox platform2;
