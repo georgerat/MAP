@@ -30,21 +30,25 @@ namespace Jumpy_Bears
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
-                Close();
+                Application.Exit();
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.A)
                 player.isMovingLeft = true;
             if (e.KeyCode == Keys.Right || e.KeyCode == Keys.D)
                 player.isMovingRight = true;
             if (e.KeyCode == Keys.Up || e.KeyCode == Keys.W)
             {
+                if (!player.isJumping)
+                    player.gravity = -Player.maxGravity;
+                player.isJumping = true;
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
                 if (start == false)
                 {
                     timer1.Enabled = true;
                     start = true;
+                    label1.Visible = false;
                 }
-                if (!player.isJumping)
-                    player.gravity = -Player.maxGravity;
-                player.isJumping = true;
             }
         }
 

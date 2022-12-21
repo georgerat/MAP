@@ -34,6 +34,7 @@
             this.platform2 = new System.Windows.Forms.PictureBox();
             this.platform3 = new System.Windows.Forms.PictureBox();
             this.platform4 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.platform1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.platform2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.platform3)).BeginInit();
@@ -86,15 +87,30 @@
             this.platform4.TabStop = false;
             this.platform4.Tag = "platform";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Showcard Gothic", 30F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(2, 194);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(623, 62);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "PRESS \'ENTER\' TO START";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(682, 753);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.platform4);
             this.Controls.Add(this.platform3);
             this.Controls.Add(this.platform2);
             this.Controls.Add(this.platform1);
+            this.MaximumSize = new System.Drawing.Size(700, 800);
+            this.MinimumSize = new System.Drawing.Size(700, 800);
             this.Name = "Form1";
             this.Text = "Jumpy Bears";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -105,6 +121,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.platform3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.platform4)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -114,6 +131,7 @@
         private System.Windows.Forms.PictureBox platform2;
         private System.Windows.Forms.PictureBox platform3;
         private System.Windows.Forms.PictureBox platform4;
+        private System.Windows.Forms.Label label1;
     }
 }
 

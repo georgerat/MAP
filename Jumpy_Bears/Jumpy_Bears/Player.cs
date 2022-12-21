@@ -15,7 +15,7 @@ namespace Jumpy_Bears
         {
             image = new PictureBox();
             image.Parent = Engine.form;
-            image.Location = new Point(Engine.form.Width / 2, Engine.form.Height / 2);
+            image.Location = new Point(Engine.form.Width - 120, Engine.form.Height / 2 + 10);
             image.Size = new Size(80, 80);
             image.BackColor = Color.ForestGreen;
         }
