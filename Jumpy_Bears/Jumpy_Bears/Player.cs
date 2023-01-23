@@ -7,9 +7,9 @@ namespace Jumpy_Bears
     public class Player
     {
         public PictureBox image;
-        public int speed = 15, gravity;
+        public int speed = 15, gravity, platformGravity = 5;
         public bool isMovingLeft, isMovingRight, isJumping = true;
-        public const int maxGravity = 20;
+        public const int maxGravity = 25;
 
         public Player()
         {
@@ -17,7 +17,7 @@ namespace Jumpy_Bears
             image.Parent = Engine.form;
             image.Location = new Point(Engine.form.Width - 120, Engine.form.Height / 2 + 10);
             image.Size = new Size(80, 80);
-            image.BackColor = Color.ForestGreen;
+            image.BackColor = Color.Green;
         }
 
         public void Move()
@@ -32,7 +32,7 @@ namespace Jumpy_Bears
                 if ((string)x.Tag == "platform")
                 {
                     if (x.Top <= Engine.form.Height)
-                        x.Top = x.Top + 5;
+                        x.Top = x.Top + platformGravity;
                     else
                     {
                         Random random = new Random();

@@ -7,6 +7,7 @@ namespace Jumpy_Bears
     {
         public Player player;
         bool start = false;
+        public static double scor = 0;
 
         public Form1()
         {
@@ -16,6 +17,10 @@ namespace Jumpy_Bears
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            scor++;
+            if (scor % 1000 == 0)
+                player.platformGravity++;
+            Engine.form.ScorLabel.Text = $"SCOR: {(int)(scor / 10)}";
             player.Move();
             Engine.CheckIfYouLose();
         }

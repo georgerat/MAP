@@ -35,6 +35,7 @@
             this.platform3 = new System.Windows.Forms.PictureBox();
             this.platform4 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.ScorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.platform1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.platform2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.platform3)).BeginInit();
@@ -98,12 +99,25 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "PRESS \'ENTER\' TO START";
             // 
+            // ScorLabel
+            // 
+            this.ScorLabel.AutoSize = true;
+            this.ScorLabel.BackColor = System.Drawing.Color.Transparent;
+            this.ScorLabel.Font = new System.Drawing.Font("Showcard Gothic", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ScorLabel.ForeColor = System.Drawing.Color.Red;
+            this.ScorLabel.Location = new System.Drawing.Point(12, 9);
+            this.ScorLabel.Name = "ScorLabel";
+            this.ScorLabel.Size = new System.Drawing.Size(145, 42);
+            this.ScorLabel.TabIndex = 6;
+            this.ScorLabel.Text = "SCOR: 0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(682, 753);
+            this.Controls.Add(this.ScorLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.platform4);
             this.Controls.Add(this.platform3);
@@ -132,6 +146,7 @@
         private System.Windows.Forms.PictureBox platform3;
         private System.Windows.Forms.PictureBox platform4;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label ScorLabel;
     }
 }
 

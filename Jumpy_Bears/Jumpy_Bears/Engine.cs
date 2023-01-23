@@ -20,9 +20,20 @@ namespace Jumpy_Bears
                 {
                     if (form.player.image.Bounds.IntersectsWith((control as PictureBox).Bounds) && (control as PictureBox).Top >= 80)
                     {
-                        form.player.gravity = 5;
-                        form.player.isJumping = false;
-                        form.player.image.Top = (control as PictureBox).Top - form.player.image.Height + 1;
+                        if (TopCollision(control as PictureBox, form.player.image))
+                        {
+                            form.player.gravity = 5;
+                            form.player.isJumping = false;
+                            form.player.image.Top = (control as PictureBox).Top - form.player.image.Height + 1;
+                        }
+                        
+                        else if (BottomCollision(control as PictureBox, form.player.image))
+                        {
+                            form.player.gravity = 5;
+                            form.player.isJumping = false;
+                            form.player.image.Top = (control as PictureBox).Bottom;
+                        }
+                        
                     }
                 }
             }
@@ -33,6 +44,36 @@ namespace Jumpy_Bears
                 form.player.isJumping = false;
                 form.player.image.Top = 0;
             }
+        }
+
+        static bool BottomCollision(PictureBox pB1, PictureBox pB2)
+        {
+            if (pB1.Bottom <= pB2.Top)
+                return true;
+            return false;
+        }
+
+        static bool TopCollision(PictureBox pB1, PictureBox pB2)
+        {
+            if (pB1.Top >= pB2.Bottom)
+                return true;
+            return false;
+        }
+
+        static bool RightCollision(PictureBox pB1, PictureBox pB2)
+        {
+            if (pB1.Right > pB2.Left && pB1.Left < pB2.Left
+                && pB1.Bottom > pB2.Top && pB1.Top < pB2.Bottom)
+                return true;
+            return false;
+        }
+
+        static bool LeftCollision(PictureBox pB1, PictureBox pB2)
+        {
+            if (pB1.Left < pB2.Right && pB1.Right > pB2.Right
+                && pB1.Bottom > pB2.Top && pB1.Top < pB2.Bottom)
+                return true;
+            return false;
         }
 
         public static void CheckIfYouLose()
