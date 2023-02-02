@@ -52,14 +52,14 @@ namespace Jumpy_Bears
                 return true;
             return false;
         }
-
+        /*
         static bool TopCollision(PictureBox pB1, PictureBox pB2)
         {
             if (pB1.Top >= pB2.Bottom)
                 return true;
             return false;
         }
-
+        */
         static bool RightCollision(PictureBox pB1, PictureBox pB2)
         {
             if (pB1.Right > pB2.Left && pB1.Left < pB2.Left
